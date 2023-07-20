@@ -1,3 +1,6 @@
+## PLEASE IGNORE THIS FILE
+## USE 'IMPORT CSV.PY' INSTEAD
+
 # % of votes each candidate won
 # total number of votes each candidate won
 
