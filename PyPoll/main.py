@@ -1,6 +1,3 @@
-import csv
-import os
-
 #The total number of votes cast
 
 #A complete list of candidates who received votes
@@ -10,6 +7,9 @@ import os
 #The total number of votes each candidate won
 
 #The winner of the election based on popular vote
+
+import csv
+import os
 
 total_num_votes = 0
 candidates_list = []
@@ -38,17 +38,43 @@ with open(csvpath) as csvfile:
         # if the candidate already exist, just increment the value for the name by 1
         else: 
             vote_count[name] += 1
-    #for i, v in vote_count.items():
-        #print(f"Percentage for {i} is %{round(v/vote_count*100,2)}")
+            
+# Writing in output txt file
+with open(analysis, "a") as txtfile:
+    txtfile.write(f"Election Results \n")
+    txtfile.write(f"-"*25)
+    txtfile.write("\n")
+    txtfile.write(f"Total Votes: {total_num_votes} \n")
+    txtfile.write(f"-"*25)
+    txtfile.write("\n")
+    
     for i, v in vote_count.items():
-        print(f"Name {i}: ({v})")
-    max_votes = 0
-    name = ""
+        percent_vote = (v /total_num_votes) * 100
+        percent_vote = round(percent_vote,2) 
+        
+        print(f"Name: {i}: {percent_vote}% ({v})")
+        txtfile.write(f"{i} : {percent_vote}% ({v}) \n")
+
+    for i, v in vote_count.items():
+        
+        #Total Number of Votes each candidate won          
+        max_votes = 0
+        name = ""
+           
     for i,v in vote_count.items():
         if max_votes < v: 
-        # 0 < 85213 , 85213 < 272892
             max_votes = v
             name = i
         else:
-            continue
+            continue  
+    
+with open(analysis, "a") as txtfile:
+    txtfile.write(f"-"*25)
+    txtfile.write("\n")
+    txtfile.write(f"Winner: {name}")
+            
+    print("-"*25)
     print(f"Winner: {name}")
+    print("-"*25)
+        
+
