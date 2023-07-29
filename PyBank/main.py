@@ -3,7 +3,7 @@ import os
 
 # read the csv file 
 csvpath = os.path.join('BudgetData.csv')
-csvoutput = os.path.join("output.txt")
+analysis = os.path.join("analysis.txt")
 
 total_months = 0
 net_total_amount = 0
@@ -38,7 +38,18 @@ with open(csvpath) as csvfile:
         
         #total_net_change = total_net_change + net_change
         average_change = sum(net_change_list) / len(net_change_list)
-    
+        
+# Write results to a txt file
+with open(analysis, "a") as txtfile:
+    txtfile.write(f"Financial Analysis \n")
+    txtfile.write(f"-"*25)
+    txtfile.write("\n")
+    txtfile.write(f"Total Months is : {(total_months)} \n")
+    txtfile.write(f"Total : ${net_total_amount} \n")
+    txtfile.write(f"Average Change : ${str('%.2f' %average_change)} \n")
+    txtfile.write(f"Greatest Increase in Profits: {months[net_change_list.index(max(net_change_list))]} (${max(net_change_list)}) \n")
+    txtfile.write(f"Greatest Decrease in Profits: {months[net_change_list.index(min(net_change_list))]} (${min(net_change_list)}) \n")    
+          
     print("Financial Analysis")
     print(f"-"*25)
     print(f"Total Months is : {(total_months)}")
